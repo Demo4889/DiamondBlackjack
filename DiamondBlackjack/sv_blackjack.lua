@@ -22,13 +22,20 @@ local blackjackGameInProgress = {}
 local blackjackGameData = {}
 
 function tryTakeChips(source,amount)
-    --returns true if taken chips succesfully
-    --returns false if doesn't have enough chips
-    return true
+    local xPlayer = ESX.GetPlayerFromId(source)
+	local item = xPlayer.getInventoryItem('casino_token').count
+		if item >= amount then
+			xPlayer.removeInventoryItem('casino_token',amount)
+			return true
+		else 
+			TriggerClientEvent('esx:showNotification', source, 'You dont have enough chips')
+			return false --you dont actually need to return false, since default is false but anw. I like this way
+		end
 end
 
 function giveChips(source,amount)
-    --gives amount in chips to source
+    local xPlayer = ESX.GetPlayerFromId(source)
+	xPlayer.addInventoryItem('casino_token', amount)
 end
 
 AddEventHandler('playerDropped', function (reason)
