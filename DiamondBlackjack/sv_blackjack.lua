@@ -29,7 +29,7 @@ function tryTakeChips(source,amount)
 			return true
 		else 
 			TriggerClientEvent('esx:showNotification', source, 'You dont have enough chips')
-			return false --you dont actually need to return false, since default is false but anw. I like this way
+			return false
 		end
 end
 
